@@ -117,30 +117,30 @@
             color: #333;
         }
 
-        /* Gallery Grid Layout */
+        /* Masonry Grid Layout */
         .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            column-count: 2;
+            column-gap: 20px;
             margin-bottom: 60px;
         }
 
         .gallery-item {
             position: relative;
-            aspect-ratio: 4/5;
             background-color: #f0f0f0;
             border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
+            margin-bottom: 20px;
+            display: inline-block;
+            width: 100%;
         }
 
-        /* Placeholder styles until we get real photos */
+        /* Remove the fixed aspect ratio */
         .gallery-item img {
             width: 100%;
-            height: 100%;
-            object-fit: cover;
+            display: block; /* Removes bottom space under image */
             transition: transform 0.5s ease;
-            filter: contrast(95%) sepia(105%); /* Subtle vintage film feel */
+            filter: contrast(95%) sepia(105%); 
         }
 
         .gallery-item:hover img {
@@ -217,28 +217,34 @@
             <p>Outside of my research, I shoot analog film. Here is a curated selection of my recent work.</p>
             
             <div class="gallery-grid">
-                <!-- Photo 1 -->
+                <!-- Horizontal Photo 1 -->
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1517487881594-2787fef5ebf7?w=800&q=80" alt="Placeholder 1">
-                    <div class="photo-caption">San Francisco, 35mm</div>
+                    <img src="https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=800&q=80" alt="Placeholder 1">
+                    <div class="photo-caption">Horizontal Shot, 35mm</div>
                 </div>
 
-                <!-- Photo 2 -->
+                <!-- Vertical Photo 1 -->
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1493606371202-6275828f90f3?w=800&q=80" alt="Placeholder 2">
-                    <div class="photo-caption">Kyoto, 120 format</div>
-                </div>
-
-                <!-- Photo 3 -->
-                <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1542640244-7e672d6cb466?w=800&q=80" alt="Placeholder 3">
+                    <img src="https://images.unsplash.com/photo-1542640244-7e672d6cb466?w=600&q=80" alt="Placeholder 2">
                     <div class="photo-caption">Portrait on Portra 400</div>
                 </div>
 
-                <!-- Photo 4 -->
+                <!-- Horizontal Photo 2 -->
                 <div class="gallery-item">
-                    <img src="https://images.unsplash.com/photo-1518177196024-4ce952afec3e?w=800&q=80" alt="Placeholder 4">
-                    <div class="photo-caption">Street scene, Black & White</div>
+                    <img src="https://images.unsplash.com/photo-1493606371202-6275828f90f3?w=800&q=80" alt="Placeholder 3">
+                    <div class="photo-caption">Kyoto Landscape</div>
+                </div>
+
+                <!-- Horizontal Photo 3 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1444090542259-0af8fa96557e?w=800&q=80" alt="Placeholder 4">
+                    <div class="photo-caption">Cinematic Wide</div>
+                </div>
+                
+                <!-- Vertical Photo 2 -->
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1518177196024-4ce952afec3e?w=600&q=80" alt="Placeholder 5">
+                    <div class="photo-caption">Street scene, B&W</div>
                 </div>
             </div>
         </section>
