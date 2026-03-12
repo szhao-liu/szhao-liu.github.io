@@ -103,6 +103,17 @@
             color: #333;
         }
 
+        p a {
+            color: var(--text-main);
+            text-decoration-color: #ccc;
+            text-underline-offset: 2px;
+            transition: all 0.2s;
+        }
+
+        p a:hover {
+            text-decoration-color: var(--text-main);
+        }
+
         /* Publication List */
         .pub-item {
             margin-bottom: 24px;
@@ -175,8 +186,8 @@
     <main>
         <section id="about">
             <h2>About</h2>
-            <p>I am a 2nd-year Ph.D. student in the Department of Computer Science and Engineering at Santa Clara University, where I am fortunate to be advised by Prof. Kai Lukoff. My research lies at the intersection of Human-Computer Interaction (HCI) and Artificial Intelligence. Specifically, I focus on designing and building autonomous agents and highly personalized AI assistants that seamlessly integrate into complex daily workflows.</p>
-            <p>Before coming to Santa Clara, I interned at several tech companies across the Bay Area as a Product Designer. I hold a Master's degree in Information Science from the University of North Carolina at Chapel Hill, and a Bachelor's degree in Computer Science from Indiana University.</p>
+            <p>I am a 2nd-year Ph.D. student in the <a href="https://scuhci.com" target="_blank">Human-Computer Interaction Lab</a> at Santa Clara University, where I am fortunate to be advised by <a href="https://kailukoff.com" target="_blank">Prof. Kai Lukoff</a>. My research lies at the intersection of Human-Computer Interaction (HCI) and Artificial Intelligence. Specifically, I focus on designing and building autonomous agents and highly personalized AI assistants that seamlessly integrate into complex daily workflows.</p>
+            <p>Before coming to Santa Clara, I interned at several tech companies across the Bay Area as a Product Designer. I hold a Master's degree in <a href="https://sils.unc.edu" target="_blank">Information Science</a> from the University of North Carolina at Chapel Hill, and a Bachelor's degree in <a href="https://luddy.iu.edu" target="_blank">Computer Science</a> from Indiana University Bloomington.</p>
         </section>
 
         <section id="selected-works">
