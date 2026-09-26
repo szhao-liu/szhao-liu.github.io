@@ -144,6 +144,179 @@
             border-bottom-color: var(--text-main);
         }
 
+        /* Activity List */
+        .activity-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .activity-item {
+            position: relative;
+            display: grid;
+            grid-template-columns: 78px 16px 1fr;
+            column-gap: 12px;
+            margin-bottom: 14px;
+        }
+
+        .activity-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .activity-date {
+            color: var(--text-muted);
+            font-size: 12px;
+            white-space: nowrap;
+            padding-top: 1px;
+        }
+
+        .activity-dot {
+            position: relative;
+            z-index: 1;
+            justify-self: center;
+            align-self: start;
+            width: 7px;
+            height: 7px;
+            margin-top: 7px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            background: var(--text-main);
+            border: 1px solid var(--text-main);
+        }
+
+        /* Timeline line: a segment from each dot down to the next one */
+        .activity-item::before,
+        .activity-item::after {
+            content: "";
+            position: absolute;
+            left: 97.5px;   /* centre of the dot column */
+            width: 1px;
+            top: 10.5px;    /* dot centre */
+            bottom: -24.5px; /* next dot centre (14px gap + 10.5px) */
+        }
+
+        .activity-item::before {
+            background: var(--border);
+        }
+
+        .activity-item::after {
+            background: var(--text-main);
+            transform-origin: top center;
+        }
+
+        .activity-item:last-child::before,
+        .activity-item:last-child::after {
+            display: none;
+        }
+
+        .activity-text {
+            color: #333;
+        }
+
+        /* Trace animation. Only active once the script has run, so the
+           section renders fully drawn if JavaScript is unavailable. */
+        .activity-list.js .activity-item::after {
+            transform: scaleY(0);
+            transition: transform var(--seg-dur, 0.3s) linear var(--seg-delay, 0s);
+        }
+
+        .activity-list.js .activity-item.is-linked::after {
+            transform: scaleY(1);
+        }
+
+        .activity-list.js .activity-dot {
+            background: var(--bg);
+            border-color: var(--text-muted);
+            transition: background-color 0.25s ease var(--dot-delay, 0s),
+                        border-color 0.25s ease var(--dot-delay, 0s);
+        }
+
+        .activity-list.js .activity-item.is-reached .activity-dot {
+            background: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .activity-list.js .activity-date,
+        .activity-list.js .activity-text {
+            opacity: 0.35;
+            transition: opacity 0.4s ease var(--dot-delay, 0s);
+        }
+
+        .activity-list.js .activity-item.is-reached .activity-date,
+        .activity-list.js .activity-item.is-reached .activity-text {
+            opacity: 1;
+        }
+
+        /* Collapsed preview: the first five entries, the rest behind a button */
+        .activity-list.is-collapsed .activity-item:nth-child(n+6) {
+            display: none;
+        }
+
+        .activity-list.is-collapsed .activity-item:nth-child(5)::before,
+        .activity-list.is-collapsed .activity-item:nth-child(5)::after {
+            display: none;
+        }
+
+        .activity-toggle {
+            display: none;
+            margin: 18px 0 0 118px; /* lines up with the entry text */
+            padding: 0 0 1px 0;
+            border: 0;
+            border-bottom: 1px solid var(--border);
+            background: none;
+            font: inherit;
+            font-size: 12px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: color 0.2s, border-color 0.2s;
+        }
+
+        .activity-list.js + .activity-toggle {
+            display: inline-block;
+        }
+
+        .activity-toggle:hover {
+            color: var(--text-main);
+            border-bottom-color: var(--text-main);
+        }
+
+        /* Teaching List */
+        .teaching-list {
+            margin: 0;
+            padding-left: 18px;
+            color: #333;
+        }
+
+        .teaching-list li {
+            margin-bottom: 10px;
+        }
+
+        .teaching-role {
+            display: block;
+            color: var(--text-muted);
+            font-size: 12px;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .activity-list.js .activity-item::after,
+            .activity-list.js .activity-dot,
+            .activity-list.js .activity-date,
+            .activity-list.js .activity-text {
+                transition: none;
+            }
+        }
+
+        .activity-text a {
+            color: var(--text-main);
+            text-decoration-color: #ccc;
+            text-underline-offset: 2px;
+            transition: all 0.2s;
+        }
+
+        .activity-text a:hover {
+            text-decoration-color: var(--text-main);
+        }
+
         @media (max-width: 768px) {
             .container {
                 grid-template-columns: 1fr;
@@ -173,7 +346,6 @@
         
         <nav>
             <a href="index.html" class="active">About</a>
-            <a href="index.html#selected-works">Publications</a>
             <a href="cv.html">CV</a>
             <a href="gallery.html">Gallery</a>
         </nav>
@@ -187,8 +359,77 @@
     <main>
         <section id="about">
             <h2>About</h2>
-            <p>I am a 2nd-year Ph.D. student in the <a href="https://scuhci.com" target="_blank">Human-Computer Interaction Lab</a> at Santa Clara University, where I am fortunate to be advised by <a href="https://kailukoff.com" target="_blank">Prof. Kai Lukoff</a>. My research study how people engage with digital technologies, with a particular focus on digital well-being. I am especially interested in designing tools that help people manage distraction and use technology more intentionally.</p>
-            <p>Before coming to Santa Clara, I interned at several tech companies across the Bay Area as a Product Designer. I hold a Master's degree in <a href="https://sils.unc.edu" target="_blank">Information Science</a> from the University of North Carolina at Chapel Hill, and a Bachelor's degree in <a href="https://luddy.iu.edu" target="_blank">Computer Science</a> from Indiana University Bloomington.</p>
+            <p>I am a 2nd-year Ph.D. student in the <a href="https://scuhci.com" target="_blank">Human-Computer Interaction Lab</a> at Santa Clara University, where I am fortunate to be advised by <a href="https://kailukoff.com" target="_blank">Prof. Kai Lukoff</a>. My research study how people engage with digital technologies, with a particular focus on people with ADHD. I am especially interested in designing tools that help people manage distraction and use technology more intentionally.</p>
+            <p>Before coming to Santa Clara, I interned at a few companies across the Bay Area as a Product Designer. I hold a Master's degree in <a href="https://sils.unc.edu" target="_blank">Information Science</a> from the University of North Carolina at Chapel Hill, and a Bachelor's degree in <a href="https://luddy.iu.edu" target="_blank">Computer Science</a> from Indiana University Bloomington.</p>
+        </section>
+
+        <section id="activity">
+            <h2>Activity</h2>
+            <ul class="activity-list" id="activity-list">
+                <!-- Newest first -->
+                <li class="activity-item">
+                    <span class="activity-date">Sep 2026</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Visited the Human-Centred Computing (HCC) section at the University of Copenhagen in Denmark.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Jul 2026</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Lab visit to Maastricht University in the Netherlands.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Jun 2026</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Lab visit to Ulm University in Germany to see Luca-Maxim Meinhardt, who did his postdoc in our lab at Santa Clara in 2024.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">May 2026</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Accepted to <a href="https://cra.org/ur2phd/" target="_blank">UR2PhD</a> as a graduate mentor and advised two undergraduate students on a research project.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Apr 2026</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Attended CHI 2026 in Barcelona, Spain.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Aug 2025</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Accepted to <a href="https://sicss.io/2025/stanford/" target="_blank">SICSS-Stanford</a>, the Summer Institute in Computational Social Science, where I met several collaborators, including Lei Cao and Celia Lee, with whom I have been working on a project since.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Apr 2025</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Attended CHI 2025 in Yokohama, Japan.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Dec 2024</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Attended the Stanford Design Thinking for User Experience Project Expo to prepare for the HCI course at Santa Clara.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Sep 2024</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Started my Ph.D. as a research assistant in the <a href="https://scuhci.com" target="_blank">HCI Lab</a> at Santa Clara University, advised by <a href="https://kailukoff.com" target="_blank">Prof. Kai Lukoff</a>.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">May 2024</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Attended my first CHI in Honolulu, Hawaiʻi, a few months before starting the Ph.D.</span>
+                </li>
+            </ul>
+            <button class="activity-toggle" type="button" aria-controls="activity-list" aria-expanded="false">View all</button>
+        </section>
+
+        <section id="teaching">
+            <h2>Teaching</h2>
+            <p>Courses I have taught at Santa Clara University.</p>
+            <ul class="teaching-list">
+                <li>CSEN 60, Introduction to Web Technologies <span class="teaching-role">Teaching assistant, Fall 2025</span></li>
+                <li>CSEN 129, Human-Computer Interaction <span class="teaching-role">Teaching assistant, Winter 2025 and Winter 2026</span></li>
+                <li>CSEN 161, Web Development <span class="teaching-role">Teaching assistant, Fall 2025 and Winter 2026</span></li>
+                <li>CSEN 277, Human-Computer Interaction (graduate level) <span class="teaching-role">Grader, Spring 2025</span></li>
+            </ul>
         </section>
 
         <section id="selected-works" style="display: none;">
@@ -215,6 +456,85 @@
         </section>
     </main>
 </div>
+
+<script>
+(function () {
+    // Traces the activity timeline: each entry lights up, and the line
+    // draws down to it, once it comes into view. Runs top to bottom, one way.
+    var list = document.querySelector('.activity-list');
+    if (!list || !window.requestAnimationFrame) return;
+    var items = Array.prototype.slice.call(list.querySelectorAll('.activity-item'));
+    if (!items.length) return;
+    list.classList.add('js');
+
+    var STEP = 0.28;       // seconds per entry
+    var MAX_RUN = 1.6;     // cap for a batch that comes into view at once
+    var reached = 0;
+    var ticking = false;
+
+    function update() {
+        ticking = false;
+        // An entry counts as reached once its dot is inside the viewport.
+        // If the page is scrolled to the bottom, everything counts.
+        var limit = window.innerHeight - 12;
+        var doc = document.documentElement;
+        var atBottom = window.pageYOffset + window.innerHeight >= doc.scrollHeight - 2;
+        var next = reached;
+        while (next < items.length) {
+            if (!items[next].offsetParent) break; // hidden behind the View all button
+            var dot = items[next].querySelector('.activity-dot');
+            var r = dot.getBoundingClientRect();
+            if (atBottom || r.top + r.height / 2 <= limit) { next++; } else { break; }
+        }
+        if (next === reached) return;
+
+        var batch = next - reached;
+        var step = Math.min(STEP, MAX_RUN / batch);
+        for (var i = reached; i < next; i++) {
+            var k = i - reached;
+            var dotDelay = k * step + (reached > 0 ? step : 0);
+            items[i].style.setProperty('--dot-delay', dotDelay.toFixed(2) + 's');
+            items[i].classList.add('is-reached');
+            if (i > 0) {
+                var prev = items[i - 1];
+                prev.style.setProperty('--seg-delay', Math.max(0, dotDelay - step).toFixed(2) + 's');
+                prev.style.setProperty('--seg-dur', step.toFixed(2) + 's');
+                prev.classList.add('is-linked');
+            }
+        }
+        reached = next;
+    }
+
+    function schedule() {
+        if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }
+
+    // Preview the first few entries; the button reveals the rest.
+    var PREVIEW = 5;
+    var toggle = document.querySelector('.activity-toggle');
+    if (toggle) {
+        if (items.length > PREVIEW) {
+            list.classList.add('is-collapsed');
+            toggle.addEventListener('click', function () {
+                var expanded = !list.classList.toggle('is-collapsed');
+                toggle.textContent = expanded ? 'Show less' : 'View all';
+                toggle.setAttribute('aria-expanded', expanded ? 'true' : 'false');
+                if (expanded) {
+                    window.requestAnimationFrame(function () { window.requestAnimationFrame(update); });
+                }
+            });
+        } else {
+            toggle.style.display = 'none';
+        }
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+    window.addEventListener('load', schedule);
+    // Let the untraced state paint once before the trace begins.
+    window.requestAnimationFrame(function () { window.requestAnimationFrame(update); });
+})();
+</script>
 
 </body>
 </html>
