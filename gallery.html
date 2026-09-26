@@ -146,6 +146,13 @@
             transform: scale(1.03);
         }
 
+        /* Images carry width/height attributes so the browser reserves the right
+           space before they load (stops the columns reshuffling). Keep height auto
+           so those attributes only set the aspect ratio. */
+        .gallery-item img[width][height] {
+            height: auto;
+        }
+
         .photo-caption {
             position: absolute;
             bottom: 0;
@@ -217,63 +224,63 @@
             <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 13.5px; margin-top: 40px; margin-bottom: 20px;">India, Summer 2026</h3>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="photos/india/india_03.JPG" alt="India 3">
+                    <img src="photos/india/india_03.JPG" width="1200" height="824" alt="India 3">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/india/india_01.JPG" alt="India 1">
+                    <img src="photos/india/india_01.JPG" width="1200" height="824" alt="India 1">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/india/india_05.JPG" alt="India 5">
+                    <img src="photos/india/india_05.JPG" width="1200" height="800" alt="India 5">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/india/india_02.JPG" alt="India 2">
+                    <img src="photos/india/india_02.JPG" width="1200" height="824" alt="India 2">
                 </div>
             </div>
 
             <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 13.5px; margin-top: 40px; margin-bottom: 20px;">Paris, Summer 2025</h3>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_01.JPG" alt="Paris 1">
+                    <img src="photos/paris/paris_01.JPG" width="1200" height="796" alt="Paris 1">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_02.JPG" alt="Paris 2">
+                    <img src="photos/paris/paris_02.JPG" width="1200" height="796" alt="Paris 2">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_03.JPG" alt="Paris 3">
+                    <img src="photos/paris/paris_03.JPG" width="1200" height="796" alt="Paris 3">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_05.JPG" alt="Paris 5">
+                    <img src="photos/paris/paris_05.JPG" width="1200" height="796" alt="Paris 5">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_06.JPG" alt="Paris 6">
+                    <img src="photos/paris/paris_06.JPG" width="1200" height="796" alt="Paris 6">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_07.JPG" alt="Paris 7">
+                    <img src="photos/paris/paris_07.JPG" width="1200" height="796" alt="Paris 7">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_08.JPG" alt="Paris 8">
+                    <img src="photos/paris/paris_08.JPG" width="1200" height="796" alt="Paris 8">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/paris/paris_11.JPG" alt="Paris 11">
+                    <img src="photos/paris/paris_11.JPG" width="1200" height="796" alt="Paris 11">
                 </div>
             </div>
 
             <h3 style="font-family: 'Newsreader', serif; font-weight: 400; font-size: 13.5px; margin-top: 40px; margin-bottom: 20px;">Mexico City (CDMX)</h3>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="photos/cdmx/cdmx_01.JPG" alt="Mexico City 1">
+                    <img src="photos/cdmx/cdmx_01.JPG" width="1200" height="795" alt="Mexico City 1">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/cdmx/cdmx_02.JPG" alt="Mexico City 2">
+                    <img src="photos/cdmx/cdmx_02.JPG" width="1200" height="795" alt="Mexico City 2">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/cdmx/cdmx_03.JPG" alt="Mexico City 3">
+                    <img src="photos/cdmx/cdmx_03.JPG" width="1200" height="795" alt="Mexico City 3">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/cdmx/cdmx_04.JPG" alt="Mexico City 4">
+                    <img src="photos/cdmx/cdmx_04.JPG" width="1200" height="795" alt="Mexico City 4">
                 </div>
                 <div class="gallery-item">
-                    <img src="photos/cdmx/cdmx_05.JPG" alt="Mexico City 5">
+                    <img src="photos/cdmx/cdmx_05.JPG" width="1200" height="795" alt="Mexico City 5">
                 </div>
             </div>
         </section>
