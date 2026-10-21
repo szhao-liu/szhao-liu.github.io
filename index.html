@@ -164,13 +164,13 @@
             display: flex;
             list-style: none;
             padding: 0;
-            margin: 4px 0 0;
+            margin: 10px 0 0;
         }
 
         .step {
             flex: 1;
             position: relative;
-            padding: 18px 12px 0 0;
+            padding: 20px 36px 0 0;
             font-size: 12px;
             line-height: 1.45;
             color: var(--text-muted);
@@ -186,8 +186,9 @@
             background: var(--border);
         }
 
+        /* The line runs past the last dot to the edge of the column */
         .step:last-child::before {
-            display: none;
+            right: 0;
         }
 
         .step-dot {
@@ -297,6 +298,9 @@
                 bottom: -3.5px;
                 width: 1px;
                 height: auto;
+            }
+            .step:last-child::before {
+                display: none;
             }
             .step-dot {
                 top: 4px;
