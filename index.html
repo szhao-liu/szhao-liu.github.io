@@ -144,6 +144,172 @@
             border-bottom-color: var(--text-main);
         }
 
+        /* Current Projects */
+        .project-item {
+            margin-bottom: 28px;
+        }
+
+        .project-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .project-title {
+            font-weight: 500;
+            color: var(--text-main);
+            margin-bottom: 6px;
+        }
+
+        /* Project process strip (same dot and line language as the Activity timeline) */
+        .process {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 4px 0 0;
+        }
+
+        .step {
+            flex: 1;
+            position: relative;
+            padding: 18px 12px 0 0;
+            font-size: 12px;
+            line-height: 1.45;
+            color: var(--text-muted);
+        }
+
+        .step::before {
+            content: "";
+            position: absolute;
+            left: 3.5px;
+            right: -3.5px;
+            top: 3.5px;
+            height: 1px;
+            background: var(--border);
+        }
+
+        .step:last-child::before {
+            display: none;
+        }
+
+        .step-dot {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            box-sizing: border-box;
+            border: 1px solid var(--text-muted);
+            background: var(--bg);
+        }
+
+        .step.is-done .step-dot,
+        .step.is-now .step-dot {
+            background: var(--text-main);
+            border-color: var(--text-main);
+        }
+
+        .step.is-now .step-dot {
+            box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--text-main);
+        }
+
+        .step-phase {
+            display: block;
+            font-size: 11px;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 2px;
+        }
+
+        .step-name {
+            display: block;
+            color: var(--text-muted);
+        }
+
+        .step.is-now .step-name {
+            color: var(--text-main);
+        }
+
+        .step-note {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .step-note a {
+            color: var(--text-main);
+            text-decoration-color: #ccc;
+            text-underline-offset: 2px;
+            transition: all 0.2s;
+        }
+
+        .step-note a:hover {
+            text-decoration-color: var(--text-main);
+        }
+
+        /* Project with a figure beside the text */
+        .project-item.with-figure {
+            display: grid;
+            grid-template-columns: 1fr 170px;
+            gap: 24px;
+            align-items: start;
+        }
+
+        .project-figure {
+            margin: 4px 0 0;
+        }
+
+        .project-figure img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 8px;
+            filter: grayscale(100%);
+            transition: filter 0.3s ease;
+        }
+
+        .project-item.with-figure:hover img {
+            filter: grayscale(0%);
+        }
+
+        .project-figure figcaption {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 6px;
+        }
+
+        @media (max-width: 768px) {
+            /* Stack the phases on small screens, like the Activity timeline */
+            .process {
+                flex-direction: column;
+            }
+            .step {
+                padding: 0 0 16px 20px;
+            }
+            .step:last-child {
+                padding-bottom: 0;
+            }
+            .step::before {
+                left: 3.5px;
+                right: auto;
+                top: 3.5px;
+                bottom: -3.5px;
+                width: 1px;
+                height: auto;
+            }
+            .step-dot {
+                top: 4px;
+            }
+            .project-item.with-figure {
+                grid-template-columns: 1fr;
+            }
+            .project-figure {
+                order: -1;
+                max-width: 320px;
+            }
+        }
+
         /* Activity List */
         .activity-list {
             list-style: none;
@@ -363,6 +529,46 @@
             <p>Before coming to Santa Clara, I interned at a few companies across the Bay Area as a Product Designer. I hold a Master's degree in <a href="https://sils.unc.edu" target="_blank">Information Science</a> from the University of North Carolina at Chapel Hill, and a Bachelor's degree in <a href="https://luddy.iu.edu" target="_blank">Computer Science</a> from Indiana University Bloomington.</p>
         </section>
 
+        <section id="projects">
+            <h2>Current Projects</h2>
+
+            <div class="project-item">
+                <div class="project-title">Designing for intentional technology use</div>
+                <p>How can systems help people hold on to their intent and their original goal while they use digital technology? I study this question with people for whom attention regulation is especially hard, including people with ADHD, so that what we learn serves those who need it most. The work combines contextual inquiry and co-design with large-scale analysis of how online ADHD communities describe these struggles, so we understand the problem in depth before we design and build for it.</p>
+                <ol class="process">
+                    <li class="step is-done">
+                        <span class="step-dot"></span>
+                        <span class="step-phase">Phase 0</span>
+                        <span class="step-name">Understanding the problem</span>
+                        <span class="step-note">What 5,379 posts from r/ADHD reveal about time management with digital tools. <a href="https://arxiv.org/abs/2610.12629" target="_blank">Preprint on arXiv</a></span>
+                    </li>
+                    <li class="step is-now">
+                        <span class="step-dot"></span>
+                        <span class="step-phase">Phase 1</span>
+                        <span class="step-name">Contextual inquiry and co-design</span>
+                        <span class="step-note">Interviews and co-design sessions with people with ADHD</span>
+                    </li>
+                    <li class="step">
+                        <span class="step-dot"></span>
+                        <span class="step-phase">Phase 2</span>
+                        <span class="step-name">Design and build</span>
+                        <span class="step-note">Systems that keep intent and goals in view</span>
+                    </li>
+                </ol>
+            </div>
+
+            <div class="project-item with-figure">
+                <div>
+                    <div class="project-title">A framework for systematic mobile app reviews</div>
+                    <p>How can HCI researchers study the millions of apps in app stores with rigor, so that findings can be compared and reproduced? Studies that search an app store and analyze the apps they find are widely cited, yet there is no systematic way to conduct and report them. With <a href="https://smar-tool.org/" target="_blank">SMAR</a>, an NSF-supported project in our lab, we are writing the playbook for this kind of research, a five-step method with guidelines and a reporting checklist. My part is interviewing researchers who have done similar studies to learn what works and what gets in the way.</p>
+                </div>
+                <figure class="project-figure">
+                    <a href="https://smar-tool.org/" target="_blank"><img src="images/smar-tool.jpg" width="800" height="400" alt="The SMAR tool, a keyword search across the Google Play store"></a>
+                    <figcaption>The SMAR tool, the framework's companion for collecting app store data</figcaption>
+                </figure>
+            </div>
+        </section>
+
         <section id="activity">
             <h2>Activity</h2>
             <ul class="activity-list" id="activity-list">
@@ -375,12 +581,22 @@
                 <li class="activity-item">
                     <span class="activity-date">Jul 2026</span>
                     <span class="activity-dot"></span>
+                    <span class="activity-text">Lab visit to the <a href="https://www.cwi.nl/en/research/distributed-and-interactive-systems/" target="_blank">Distributed and Interactive Systems</a> group at CWI (Centrum Wiskunde &amp; Informatica) in Amsterdam, the Netherlands.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Jul 2026</span>
+                    <span class="activity-dot"></span>
                     <span class="activity-text">Lab visit to the <a href="https://comp4good.com" target="_blank">Law and Tech Lab</a> at Maastricht University in the Netherlands.</span>
                 </li>
                 <li class="activity-item">
                     <span class="activity-date">Jun 2026</span>
                     <span class="activity-dot"></span>
                     <span class="activity-text">Lab visit to the <a href="https://www.uni-ulm.de/in/mi/hci/" target="_blank">Human-Computer Interaction Research Group</a> at Ulm University in Germany.</span>
+                </li>
+                <li class="activity-item">
+                    <span class="activity-date">Jun 2026</span>
+                    <span class="activity-dot"></span>
+                    <span class="activity-text">Presented our poster at the <a href="https://ubicomp.health" target="_blank">UbiComp &amp; Health Symposium 2026</a> at NYU Tandon in New York City.</span>
                 </li>
                 <li class="activity-item">
                     <span class="activity-date">May 2026</span>
